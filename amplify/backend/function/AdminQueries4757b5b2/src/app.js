@@ -165,10 +165,11 @@ app.get('/getUser', async (req, res, next) => {
 app.get('/listUsers', async (req, res, next) => {
   try {
     let response;
+    let limit = Number(req.query?.limit || 25);
     if (req.query.token) {
-      response = await listUsers(req.query.limit || 25, req.query.token);
+      response = await listUsers(limit, req.query.token);
     } else if (req.query.limit) {
-      response = await listUsers((Limit = req.query.limit));
+      response = await listUsers((Limit = limit));
     } else {
       response = await listUsers();
     }
